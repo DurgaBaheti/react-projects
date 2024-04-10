@@ -1,9 +1,11 @@
 import React, { useId } from "react";
 
-const Input = React.forwardRef(function (
-    { type = "text", label, className, ...props },
-    ref
-) {
+const Input = React.forwardRef(function ({ 
+    type = "text",
+    label,
+    className,
+    ...props
+ }, ref ) {
     const id = useId();
     return (
         <div className="w-full">
