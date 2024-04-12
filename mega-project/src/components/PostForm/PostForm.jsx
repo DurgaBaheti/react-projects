@@ -1,11 +1,12 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index";
-import service, { Service } from "../../appwrite/config";
+import service from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
+
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -23,7 +24,7 @@ function PostForm({ post }) {
     if (post) {
       const file = data.image[0]
         ? await service.uploadFile(data.image[0])
-        : null;
+        : null
 
       if (file) {
         service.deleteFile(post.featuredImage);
@@ -63,8 +64,9 @@ function PostForm({ post }) {
 
     return "";
   }, []);
+
   React.useEffect(
-    (value) => {
+    () => {
       const subscription = watch((value, { name }) => {
         if (name === "title") {
           setValue(
@@ -83,6 +85,7 @@ function PostForm({ post }) {
 
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+
       <div className="w-2/3 px-2">
         <Input
           label="Title :"
@@ -108,6 +111,7 @@ function PostForm({ post }) {
           defaultValue={getValues("content")}
         />
       </div>
+
       <div className="w-1/3 px-2">
         <Input
           label="Featured Image :"
@@ -119,7 +123,7 @@ function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={service.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
