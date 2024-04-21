@@ -1,13 +1,14 @@
 import AddPost from "./AddPost";
-import SignUp from './SignUp'
+import Signup from './SignUp'
 import EditPosts from "./EditPosts";
 import Post from "./Post";
 import AllPosts from "./AllPosts";
-
+import Home from "./Home";
 export {
     AddPost,
-    SignUp,
+    Signup,
     EditPosts,
     Post,
-    AllPosts
+    AllPosts,
+    Home
 }

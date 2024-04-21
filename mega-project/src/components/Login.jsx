@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
 
-function Login() {
+function LoginComponent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -53,9 +53,9 @@ function Login() {
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
             <Input
+              type="email"
               label="Email"
               placeholder="Enter Your Email"
-              type="email"
               {...register("email", {
                 required: true,
                 validate: {
@@ -72,18 +72,19 @@ function Login() {
               type="password"
               {...register("password", {
                 required: true,
-                validate: {
-                  matchPatern: (value) =>
-                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
-                      value
-                    ) || "password must be valid",
-                },
+                // validate: {
+                //   matchPatern: (value) =>
+                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
+                //       value
+                //     ) || "password must be valid",
+                // },
               })}
             />
             <Button
-                type="submit"
-                className="w-full"
-                >Sign in</Button>
+              type="submit"
+              className="w-full"
+                >Sign in
+            </Button>
           </div>
         </form>
       </div>
@@ -91,4 +92,5 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginComponent
+  ;

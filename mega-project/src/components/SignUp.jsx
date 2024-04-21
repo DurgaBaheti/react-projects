@@ -18,8 +18,8 @@ function SignUp() {
       const session = await authService.createAccount(data);
       if (session) {
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login(userData));
-        navigate("/");
+        if (userData) (dispatch(login(userData)));
+        navigate("/login");
       }
     } catch (error) {
       setError(error.message);
@@ -43,7 +43,7 @@ function SignUp() {
             to={"/login"}
             className="font-medium text-primary transition-all duration-200 hover:underline"
           >
-            sign up
+            sign in
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
@@ -59,10 +59,10 @@ function SignUp() {
               })}
             />
             <Input
-              type="text"
+              type="email"
               label="Email: "
               palceholder="Enter Your Email"
-              {...register(email, {
+              {...register("email", {
                 required: true,
                 validation: {
                   matchPatern: (value) => {
@@ -76,7 +76,7 @@ function SignUp() {
               type="password"
               label="Password: "
               palceholder="Enter Your Password"
-              {...register(password, {
+              {...register("password", {
                 required: true,
               })}
             />

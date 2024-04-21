@@ -25,10 +25,10 @@ function PostForm({ post }) {
       const file = data.image[0]
         ? await service.uploadFile(data.image[0])
         : null
-
       if (file) {
         service.deleteFile(post.featuredImage);
       }
+      
       const dbPost = await service.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
@@ -48,6 +48,9 @@ function PostForm({ post }) {
           userId: userData.$id,
         });
         if (dbPost) {
+          console.log(dbPost);
+
+          // console.log(dbPost.$id);
           navigate(`/post/${dbPost.$id}`);
         }
       }
@@ -56,14 +59,14 @@ function PostForm({ post }) {
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string")
-      return value.at
-        .trim()
-        .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
+        return value
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-zA-Z\d\s]+/g, "-")
+            .replace(/\s/g, "-");
 
     return "";
-  }, []);
+}, []);
 
   React.useEffect(
     () => {
@@ -113,13 +116,14 @@ function PostForm({ post }) {
       </div>
 
       <div className="w-1/3 px-2">
-        <Input
-          label="Featured Image :"
-          type="file"
-          className="mb-4"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
-        />
+                <Input
+                    label="Featured Image :"
+                    type="file"
+                    className="mb-4"
+                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    {...register("image", { required: !post })}
+                />
+                
         {post && (
           <div className="w-full mb-4">
             <img
